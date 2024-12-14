@@ -1,12 +1,16 @@
-# Use the official NGINX image as a base
+# Step 1: Use a base image that has both NGINX and Git installed
 FROM nginx:latest
 
-# Copy custom NGINX configuration (optional)
-COPY nginx.conf /etc/nginx/nginx.conf
+# Step 2: Install Git (as it's not available by default in the NGINX image)
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# Copy the web application to NGINX's default HTML directory
-COPY . /usr/share/nginx/html
+# Step 3: Clone the repository (replace the URL with your actual repository URL)
+RUN git clone https://github.com/MadhuManvi/repository.git /usr/share/nginx/html
 
-# Expose the port the app will be available on
+# Step 4: Expose port 80 so we can access the NGINX server
 EXPOSE 80
+
+# Step 5: Start the NGINX server (this is the default command in the nginx image)
+CMD ["nginx", "-g", "daemon off;"]
+
 
