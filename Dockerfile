@@ -10,7 +10,5 @@ RUN git clone https://github.com/MadhuManvi/repository.git /usr/share/nginx/html
 # Step 4: Expose port 80 so we can access the NGINX server
 EXPOSE 80
 
-# Step 5: Start the NGINX server (this is the default command in the nginx image)
-CMD ["nginx", "-g", "daemon off;"]
 
 
